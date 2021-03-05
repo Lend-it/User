@@ -16,5 +16,5 @@ jobs:
     - name: Run application
       run: docker-compose -f docker-compose.dev.yml up -d
       
-    # - name: Run tests
-    #   run: docker-compose -f docker-compose.dev.yml run request python manage.py test
+    - name: Run tests
+      run: docker-compose -f docker-compose.dev.yml run user npm run test

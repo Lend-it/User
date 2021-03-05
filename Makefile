@@ -11,7 +11,7 @@ run-build:
 	sudo docker-compose -f docker-compose.dev.yml up --build
 
 test:
-	sudo docker-compose -f docker-compose.dev.yml run user npm run test
+	sudo docker-compose -f docker-compose.dev.yml run user npm run test-ci
 
 db:
 	sudo docker-compose -f docker-compose.dev.yml exec db psql -U postgres

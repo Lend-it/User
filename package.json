@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jest --watchAll",
-    "dev": "nodemon ./src/server.js"
+    "dev": "nodemon ./src/server.js",
+    "test-ci": "jest --passWithNoTests"
   },
   "repository": {
     "type": "git",

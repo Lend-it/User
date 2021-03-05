@@ -17,4 +17,4 @@ jobs:
       run: docker-compose -f docker-compose.dev.yml up -d
       
     - name: Run tests
-      run: docker-compose -f docker-compose.dev.yml run user npm run test
+      run: docker-compose -f docker-compose.dev.yml run user npm run test-ci

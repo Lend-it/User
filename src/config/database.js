@@ -4,13 +4,13 @@ export default {
     password: process.env.POSTGRES_PASSWORD,
     database: 'userlenditdb_dev',
     host: 'db',
-    dialect: 'postgres'
+    dialect: 'postgres',
   },
   test: {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: 'userlenditdb_test',
     host: 'db',
-    dialect: 'postgres'
-  }
-}
+    dialect: 'postgres',
+  },
+};

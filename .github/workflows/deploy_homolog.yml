@@ -1,0 +1,43 @@
+name: Homolog deployment
+
+on:
+    push:
+      branches:
+        - main
+        - devel
+        - 81_configurar_cd
+
+jobs:
+#   build:
+
+#     runs-on: ubuntu-latest
+
+#     steps:
+#     - uses: actions/checkout@v2
+    
+#     - name: Build application
+#       run: docker-compose -f docker-compose.dev.yml build
+      
+#     - name: Run application
+#       run: docker-compose -f docker-compose.dev.yml up -d
+      
+#     - name: Run tests
+#       run: docker-compose -f docker-compose.dev.yml run user npm run test-ci
+
+  deploy:
+
+    # needs: build
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: gonuit/heroku-docker-deploy@v1.2.0 # This is the action
+      with:
+          email: ${{ secrets.HEROKU_EMAIL }}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME_HOMOLOG }}
+          dockerfile_directory: ./
+          dockerfile_name: Dockerfile-dev
+          docker_options: "--no-cache"

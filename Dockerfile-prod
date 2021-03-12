@@ -1,9 +1,0 @@
-FROM node:14.16-alpine
-
-WORKDIR /app
-
-COPY package*.json ./
-
-COPY . ./app
-
-CMD [ "/bin/sh", "-c" ,"npm ci && npm run-script build && npm start"]

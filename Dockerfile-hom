@@ -1,3 +1,0 @@
-FROM ghcr.io/lend-it/user:homolog
-
-ENTRYPOINT ["npm", "start"]

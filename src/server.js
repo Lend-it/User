@@ -1,12 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import User from './models/User.js';
 
 dotenv.config();
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('yossfe');
+app.get('/', async (req, res) => {
+  const users = User.findAll();
+  // res.send('yossfe');
+  res.json(users);
 });
 
 const HOST = 'localhost';

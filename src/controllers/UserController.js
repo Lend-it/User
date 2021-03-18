@@ -1,8 +1,15 @@
 import User from '../models/User.js';
+import bcrypt from 'bcrypt';
+
+const saltRounds = process.env.SALT_ROUNDS;
 
 export default {
   async create(request, response) {
     const { useremail, name, whatsappnumber, password } = request.body;
+
+    const salt = bcrypt.genSaltSync(saltRounds);
+
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
     try {
       const userExists = await User.findOne({
@@ -19,7 +26,7 @@ export default {
         useremail,
         name,
         whatsappnumber,
-        password,
+        password: hashedPassword,
         latitude: 0,
         longitude: 0,
       });

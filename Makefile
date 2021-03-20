@@ -18,3 +18,6 @@ check-db:
 
 down:
 	sudo docker-compose -f docker-compose.dev.yml down
+
+cov:
+	sudo docker-compose -f docker-compose.dev.yml run user npm run cov

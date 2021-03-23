@@ -13,11 +13,11 @@ run-build:
 test:
 	sudo docker-compose -f docker-compose.dev.yml run user npm run test-ci
 
-db:
+check-db:
 	sudo docker-compose -f docker-compose.dev.yml exec db psql -U postgres
 
 down:
 	sudo docker-compose -f docker-compose.dev.yml down
 
-lint: 
-	sudo docker-compose -f docker-compose.dev.yml run user npm run lint
+cov:
+	sudo docker-compose -f docker-compose.dev.yml run user npm run cov

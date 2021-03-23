@@ -22,7 +22,8 @@
     "dev": "nodemon ./src/server.js",
     "test-ci": "jest --passWithNoTests",
     "lint": "eslint . --ext .js --fix",
-    "lint-ci": "eslint . --ext .js"
+    "lint-ci": "eslint . --ext .js",
+    "cov": "jest --coverage --passWithNoTests"
   },
   "repository": {
     "type": "git",

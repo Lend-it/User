@@ -19,7 +19,7 @@ export default {
       });
 
       if (userExists) {
-        return response.status(400).json({ error: 'User already exists.' });
+        return response.status(400).json({ error: 'Usuário já cadastrado' });
       }
 
       const user = await User.create({

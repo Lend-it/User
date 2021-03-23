@@ -1,13 +1,8 @@
-import express from 'express';
 import dotenv from 'dotenv';
+import app from './app.js';
+import './db/index.js';
 
 dotenv.config();
-
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('yossfe');
-});
 
 const HOST = 'localhost';
 const PORT = process.env.PORT || 3002;

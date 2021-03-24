@@ -6,7 +6,14 @@ const saltRounds = process.env.SALT_ROUNDS;
 
 export default {
   async create(request, response) {
-    const { useremail, name, whatsappnumber, password } = request.body;
+    const {
+      useremail,
+      name,
+      whatsappnumber,
+      password,
+      latitude,
+      longitude,
+    } = request.body;
 
     const salt = bcrypt.genSaltSync(saltRounds);
 
@@ -28,8 +35,8 @@ export default {
         name,
         whatsappnumber,
         password: hashedPassword,
-        latitude: 0,
-        longitude: 0,
+        latitude,
+        longitude,
       });
 
       const token = generateToken({ useremail });

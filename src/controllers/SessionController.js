@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
+import generateToken from '../services/auth.js';
 
 export default {
   async create(request, response) {
@@ -20,7 +21,9 @@ export default {
         return response.status(400).json({ error: 'Senha inválida' });
       }
 
-      return response.status(201).json(user);
+      const token = generateToken({ useremail });
+
+      return response.status(201).json({ user, token });
     } catch (error) {
       return response.status(500).json({ error: error.message });
     }

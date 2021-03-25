@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
+import generateToken from '../services/auth.js';
 
 const saltRounds = process.env.SALT_ROUNDS;
 
@@ -31,7 +32,9 @@ export default {
         longitude: 0,
       });
 
-      return response.status(201).json(user);
+      const token = generateToken({ useremail });
+
+      return response.status(201).json({ user, token });
     } catch (error) {
       return response.status(500).json({ error: error.message });
     }

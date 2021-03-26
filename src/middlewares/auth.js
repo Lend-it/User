@@ -9,7 +9,7 @@ function verifyToken(request, response, next) {
 
   const parts = authHeader.split(' ');
 
-  if (!parts.lenght === 2) {
+  if (!parts.lenght == 2) {
     return response.status(401).json({ error: 'Erro no token' });
   }
 

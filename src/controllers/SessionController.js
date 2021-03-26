@@ -13,17 +13,13 @@ export default {
         },
       });
 
-      if (!user) {
-        return response.status(404).json({ error: 'Usuário não cadastrado' });
-      }
-
-      if (!(await bcrypt.compare(password, user.password))) {
-        return response.status(400).json({ error: 'Senha inválida' });
+      if (!user || !(await bcrypt.compare(password, user.password))) {
+        return response.status(404).json({ error: 'Usuário/Senha inválidos' });
       }
 
       const token = generateToken({ useremail });
 
-      return response.status(201).json({ user, token });
+      return response.status(201).json(token);
     } catch (error) {
       return response.status(500).json({ error: error.message });
     }

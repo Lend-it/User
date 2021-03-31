@@ -19,7 +19,7 @@ export default {
 
       const token = generateToken({ useremail });
 
-      return response.status(201).json(token);
+      return response.status(201).json({ token, user });
     } catch (error) {
       return response.status(500).json({ error: error.message });
     }

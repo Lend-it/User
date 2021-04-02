@@ -5,6 +5,27 @@ import generateToken from '../services/auth.js';
 const saltRounds = process.env.SALT_ROUNDS;
 
 export default {
+  async list(request, response) {
+    const users = await User.findAll();
+    return response.status(200).json(users);
+  },
+
+  async show(request, response) {
+    const useremail = request.params.useremail;
+
+    const user = await User.findOne({
+      where: {
+        useremail,
+      }
+    });
+
+    if (!user) {
+      return response.status(400).json({ error: 'Usuário não existente' });
+    }
+
+    return response.status(200).json(user);
+  },
+
   async create(request, response) {
     const {
       useremail,

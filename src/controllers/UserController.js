@@ -12,7 +12,7 @@ export default {
     const users = await User.findAll({
       where: {
         useremail: usersIds,
-      }
+      },
     });
 
     return response.status(200).json(users);
@@ -24,7 +24,7 @@ export default {
     const user = await User.findOne({
       where: {
         useremail,
-      }
+      },
     });
 
     if (!user) {

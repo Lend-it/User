@@ -6,7 +6,15 @@ const saltRounds = process.env.SALT_ROUNDS;
 
 export default {
   async list(request, response) {
-    const users = await User.findAll();
+    const requestUsers = request.query.requestUsers;
+    const usersIds = requestUsers.split(',');
+
+    const users = await User.findAll({
+      where: {
+        useremail: usersIds,
+      }
+    });
+
     return response.status(200).json(users);
   },
 

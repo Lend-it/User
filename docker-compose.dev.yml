@@ -1,15 +1,15 @@
-version: "3.6"
+version: '3.6'
 
 services:
   user:
     build:
-        context: .
-        dockerfile: Dockerfile-dev
+      context: .
+      dockerfile: Dockerfile-dev
     volumes:
       - .:/app
       - /app/node_modules
     ports:
-      - 3001:3002
+      - 3002:3002
     command: /bin/sh -c "npm install && npm run dev"
     environment:
       - DB_DIALECT=postgres
@@ -18,8 +18,10 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     depends_on:
-      - db
-  db:
+      - db_user
+    networks:
+      - lendit_gateway
+  db_user:
     image: postgres:13.2-alpine
     ports:
       - 5105:5432
@@ -28,3 +30,10 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    networks:
+      - lendit_gateway
+
+networks:
+  lendit_gateway:
+    external: true
+    driver: 'bridge'

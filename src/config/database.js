@@ -3,14 +3,14 @@ export default {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: 'userlenditdb_dev',
-    host: 'db',
+    host: 'db_user',
     dialect: 'postgres',
   },
   test: {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: 'userlenditdb_test',
-    host: 'db',
+    host: 'db_user',
     dialect: 'postgres',
   },
   homolog: {

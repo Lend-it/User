@@ -79,16 +79,12 @@ export default {
   },
 
   async update(request, response) {
-    const {
-      useremail,
-      name,
-      whatsappnumber,
-    } = request.body;
+    const { useremail, name, whatsappnumber } = request.body;
 
     const user = await User.findOne({
       where: {
-        useremail
-      }
+        useremail,
+      },
     });
 
     if (!user) {
@@ -102,7 +98,6 @@ export default {
     await user.save();
 
     return response.status(200).json({ user });
-
   },
 
   async updateAvatar(request, response) {
@@ -111,8 +106,8 @@ export default {
 
     const user = await User.findOne({
       where: {
-        useremail
-      }
+        useremail,
+      },
     });
 
     if (!user) {
@@ -121,7 +116,13 @@ export default {
 
     if (user.avatar) {
       const __dirname = path.resolve();
-      const avatarPath = path.resolve(__dirname, '..', '..', 'tmp', user.avatar);
+      const avatarPath = path.resolve(
+        __dirname,
+        '..',
+        '..',
+        'tmp',
+        user.avatar
+      );
       await deleteFile(avatarPath);
     }
     user.avatar = avatar;
@@ -136,8 +137,8 @@ export default {
 
     const user = await User.findOne({
       where: {
-        useremail
-      }
+        useremail,
+      },
     });
 
     if (!user) {
@@ -150,5 +151,5 @@ export default {
     await user.save();
 
     return response.status(200).json({ user });
-  }
+  },
 };

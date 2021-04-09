@@ -75,4 +75,36 @@ export default {
       return response.status(500).json({ error: error.message });
     }
   },
+
+  async update(request, response) {
+    const {
+      useremail,
+      name,
+      whatsappnumber,
+    } = request.body;
+    const sessionUserEmail = request.useremail;
+
+    const user = await User.findOne({
+      where: {
+        useremail
+      }
+    });
+
+    if (!user) {
+      return response.status(404).json({ error: 'Usuário não existente' });
+    }
+
+    if (sessionUserEmail !== useremail) {
+      return response.status(405).json({ error: 'Usuário não tem permissão' });
+    }
+
+    user.useremail = useremail;
+    user.name = name;
+    user.whatsappnumber = whatsappnumber;
+
+    await user.save();
+
+    return response.status(200).json({ user });
+
+  }
 };

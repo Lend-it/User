@@ -11,6 +11,7 @@ class User extends Sequelize.Model {
         name: Sequelize.TEXT,
         whatsappnumber: Sequelize.TEXT,
         password: Sequelize.TEXT,
+        avatar: Sequelize.TEXT,
         latitude: Sequelize.DECIMAL,
         longitude: Sequelize.DECIMAL,
       },

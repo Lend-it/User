@@ -1,6 +1,8 @@
 import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import generateToken from '../services/auth.js';
+import { deleteFile } from '../utils/file.js';
+import path from 'path';
 
 const saltRounds = process.env.SALT_ROUNDS;
 
@@ -106,5 +108,33 @@ export default {
 
     return response.status(200).json({ user });
 
+  },
+
+  async updateAvatar(request, response) {
+    const useremail = request.useremail;
+    const avatar = request.file.filename;
+
+    const user = await User.findOne({
+      where: {
+        useremail
+      }
+    });
+
+    if (!user) {
+      return response.status(404).json({ error: 'Usuário não existente' });
+    }
+
+    if (user.avatar) {
+      const __dirname = path.resolve();
+      const avatarPath = path.resolve(__dirname, '..', '..', 'tmp', user.avatar);
+      await deleteFile(avatarPath);
+    }
+    user.avatar = avatar;
+
+    await user.save();
+
+    return response.status(200).json({ user });
+
   }
+
 };

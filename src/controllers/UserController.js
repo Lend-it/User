@@ -84,7 +84,6 @@ export default {
       name,
       whatsappnumber,
     } = request.body;
-    const sessionUserEmail = request.useremail;
 
     const user = await User.findOne({
       where: {
@@ -94,10 +93,6 @@ export default {
 
     if (!user) {
       return response.status(404).json({ error: 'Usuário não existente' });
-    }
-
-    if (sessionUserEmail !== useremail) {
-      return response.status(405).json({ error: 'Usuário não tem permissão' });
     }
 
     user.useremail = useremail;
@@ -111,7 +106,7 @@ export default {
   },
 
   async updateAvatar(request, response) {
-    const useremail = request.useremail;
+    const { useremail } = request.body;
     const avatar = request.file.filename;
 
     const user = await User.findOne({

@@ -15,8 +15,8 @@ userRouter.get('/:useremail', UserController.show);
 
 userRouter.post('/', UserController.create);
 
-userRouter.put('/', verifyToken, UserController.update);
+userRouter.put('/', UserController.update);
 
-userRouter.patch('/avatar', verifyToken, upload.single('avatar'), UserController.updateAvatar);
+userRouter.patch('/avatar', upload.single('avatar'), UserController.updateAvatar);
 
 export default userRouter;

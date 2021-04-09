@@ -129,7 +129,26 @@ export default {
     await user.save();
 
     return response.status(200).json({ user });
+  },
 
+  async updateLocation(request, response) {
+    const { latitude, longitude, useremail } = request.body;
+
+    const user = await User.findOne({
+      where: {
+        useremail
+      }
+    });
+
+    if (!user) {
+      return response.status(404).json({ error: 'Usuário não existente' });
+    }
+
+    user.latitude = latitude;
+    user.longitude = longitude;
+
+    await user.save();
+
+    return response.status(200).json({ user });
   }
-
 };

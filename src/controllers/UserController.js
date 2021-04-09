@@ -75,4 +75,29 @@ export default {
       return response.status(500).json({ error: error.message });
     }
   },
+
+  async update(request, response) {
+    const { oldPassword, newPassword, useremail } = request.body;
+    const user = await User.findOne({
+      where: {
+        useremail,
+      },
+    });
+
+    if (oldPassword && newPassword) {
+      if (!(await bcrypt.compare(oldPassword, user.password))) {
+        return response.status(400).json({ error: 'Senha Inválida!' });
+      }
+
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+      const updatedPassword = await user.update({
+        password: hashedPassword,
+      });
+
+      return response.status(204).json({ updatedPassword });
+    }
+    return response.status(200);
+  },
 };

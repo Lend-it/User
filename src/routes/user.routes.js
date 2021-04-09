@@ -10,4 +10,6 @@ userRouter.get('/:useremail', UserController.show);
 
 userRouter.post('/', UserController.create);
 
+userRouter.put('/', UserController.update);
+
 export default userRouter;

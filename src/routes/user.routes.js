@@ -18,5 +18,6 @@ userRouter.post('/', UserController.create);
 userRouter.put('/', UserController.update);
 
 userRouter.patch('/avatar', upload.single('avatar'), UserController.updateAvatar);
+userRouter.patch('/location', UserController.updateLocation);
 
 export default userRouter;

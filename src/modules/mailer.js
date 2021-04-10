@@ -1,12 +1,11 @@
 import path from 'path';
 import nodemailer from 'nodemailer';
 import hbs from 'nodemailer-express-handlebars';
-import { host, port, user, pass } from './config/mail.json';
+
+import mailTrapConfig from '../config/mail.js';
 
 const transport = nodemailer.createTransport({
-  host,
-  port,
-  auth: { user, pass },
+  ...mailTrapConfig,
 });
 
 transport.use(
@@ -18,4 +17,4 @@ transport.use(
   })
 );
 
-export default { transport };
+export default transport;

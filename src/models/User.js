@@ -13,6 +13,16 @@ class User extends Sequelize.Model {
         password: Sequelize.TEXT,
         latitude: Sequelize.DECIMAL,
         longitude: Sequelize.DECIMAL,
+
+        passwordresettoken: {
+          type: Sequelize.TEXT,
+          select: false,
+        },
+
+        passwordresetexpires: {
+          type: Date,
+          select: false,
+        },
       },
       {
         sequelize: connection,

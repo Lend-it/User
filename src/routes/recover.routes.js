@@ -1,9 +1,10 @@
 import { Router } from 'express';
 
-import RecoverRouter from '../controllers/RecoverController.js';
+import RecoverController from '../controllers/RecoverController.js';
 
 const recoverRouter = Router();
 
-recoverRouter.patch('/', RecoverRouter.forgotPassord);
+recoverRouter.patch('/', RecoverController.forgotPassword);
+recoverRouter.post('/', RecoverController.resetPassword);
 
 export default recoverRouter;

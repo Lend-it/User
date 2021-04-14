@@ -1,20 +1,19 @@
 import path from 'path';
 import nodemailer from 'nodemailer';
-import hbs from 'nodemailer-express-handlebars';
 
 import mailTrapConfig from '../config/mail.js';
 
 const transport = nodemailer.createTransport({
-  ...mailTrapConfig,
+  host: mailTrapConfig.host,
+  port: mailTrapConfig.port,
+  secure: false,
+  auth: {
+    user: mailTrapConfig.user,
+    pass: mailTrapConfig.pass,
+  },
+  tls: {
+    rejectUnauthorized: false,
+  },
 });
-
-transport.use(
-  'compile',
-  hbs({
-    viewEngine: 'handlebars',
-    viewPath: path.resolve('./src/resources/mail/'),
-    extName: '.html',
-  })
-);
 
 export default transport;

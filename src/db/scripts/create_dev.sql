@@ -26,6 +26,7 @@ CREATE TABLE "user" (
     name TEXT NOT NULL,
     whatsappNumber TEXT NOT NULL,
     password TEXT NOT NULL,
+    avatar TEXT,
     latitude NUMERIC NULL,
     longitude NUMERIC NULL,
 

@@ -114,6 +114,21 @@ export default {
       return response.status(404).json({ error: 'Usuário não existente' });
     }
 
+    if (oldPassword && newPassword) {
+      if (!(await bcrypt.compare(oldPassword, user.password))) {
+        return response.status(400).json({ error: 'Senha Inválida!' });
+      }
+
+      const salt = bcrypt.genSaltSync(saltRounds);
+      const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+      const updatedPassword = await user.update({
+        password: hashedPassword,
+      });
+
+      return response.status(204).json({ updatedPassword });
+    }
+
     if (user.avatar) {
       const __dirname = path.resolve();
       const avatarPath = path.resolve(

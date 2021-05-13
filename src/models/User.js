@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import sign from jsonwebtoken;
+import sign from 'jsonwebtoken';
 
 class User extends Sequelize.Model {
   static init(connection) {
@@ -14,16 +14,6 @@ class User extends Sequelize.Model {
         password: Sequelize.TEXT,
         latitude: Sequelize.DECIMAL,
         longitude: Sequelize.DECIMAL,
-
-        passwordresettoken: {
-          type: Sequelize.TEXT,
-          select: false,
-        },
-
-        passwordresetexpires: {
-          type: Date,
-          select: false,
-        },
       },
       {
         sequelize: connection,
@@ -35,13 +25,18 @@ class User extends Sequelize.Model {
     return this;
   }
   encodeToken() {
-    const date = new Date()
+    const date = new Date();
 
-    const token = sign({
-      exp: new Date(date).setMinutes(date.getHours() + process.env.TOKEN_EXPIRATION_HOURS),
-      iat: date.toISOString(),
-      sub: this.useremail
-    }, process.env.SECRET)
+    const token = sign(
+      {
+        exp: new Date(date).setMinutes(
+          date.getHours() + process.env.TOKEN_EXPIRATION_HOURS
+        ),
+        iat: date.toISOString(),
+        sub: this.useremail,
+      },
+      process.env.SECRET
+    );
 
     return token;
   }

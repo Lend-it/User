@@ -5,15 +5,24 @@ class RecoverPassword extends Sequelize.Model {
     super.init(
       {
         useremail: Sequelize.TEXT,
-        token: Sequelize.TEXT,
+        token: {
+          type: Sequelize.TEXT,
+          primaryKey: true,
+        },
         expires: Sequelize.DATE,
-        created_at: Sequelize.DATE,
+        created_at: {
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.NOW,
+        },
+      },
+      {
+        sequelize: connection,
+        freezeTableName: true,
+        modelName: 'recover_password',
+        timestamps: false,
       }
     );
     return this;
-  }
-  static associate(models) {
-    this.belongsTo(models.User, { foreignKey: 'usermail' })
   }
 }
 

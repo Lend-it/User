@@ -1,16 +1,14 @@
-import path from 'path';
 import nodemailer from 'nodemailer';
 
-import mailTrapConfig from '../config/mail.js';
-
 const transport = nodemailer.createTransport({
-  host: mailTrapConfig.host,
-  port: mailTrapConfig.port,
+  host: 'smtp.gmail.com',
+  port: 587,
   secure: false,
   auth: {
-    user: mailTrapConfig.user,
-    pass: mailTrapConfig.pass,
+    user: 'suporte.lend.it@gmail.com',
+    pass: 'maiacelta',
   },
+  // requireTLS: true,
   tls: {
     rejectUnauthorized: false,
   },

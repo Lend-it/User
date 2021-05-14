@@ -2,6 +2,9 @@ import User from '../models/User.js';
 import crypto from 'crypto';
 import RecoverPassword from '../models/RecoverPassword.js';
 import mailer from '../modules/mailer.js';
+import bcrypt from 'bcrypt';
+
+const saltRounds = process.env.SALT_ROUNDS;
 
 export default {
   async sendMailForgot(request, response) {
@@ -29,13 +32,39 @@ export default {
       subject: 'Recuperação de senha',
       from: 'suporte.lend.it@gmail.com',
       to: useremail,
-      html: `<html>
-      <strong>${token}</strong>
-      este é seu token
+      html: `
+      <html>
+        <strong>${token}</strong>
+        Este é seu token
       </html>
        `,
     });
 
-    return response.status(201);
+    return response.status(200).send();
+  },
+
+  async resetPassword(request, response) {
+    const { newPassword, token } = request.body;
+
+    const { useremail } = await RecoverPassword.findOne({ where: { token } });
+
+    const salt = bcrypt.genSaltSync(saltRounds);
+
+    const hashedPassword = bcrypt.hashSync(newPassword, salt);
+
+    await User.update(
+      {
+        password: hashedPassword,
+      },
+      {
+        where: {
+          useremail,
+        },
+      }
+    );
+
+    await RecoverPassword.destroy({ where: { token } });
+
+    return response.status(200).send();
   },
 };

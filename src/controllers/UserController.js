@@ -1,12 +1,12 @@
-import User from '../models/User.js';
-import bcrypt from 'bcrypt';
-import generateToken from '../services/auth.js';
-import { deleteFile } from '../utils/file.js';
-import path from 'path';
+const User = require('../models/User.js');
+const bcrypt = require('bcrypt');
+const generateToken = require('../services/auth.js');
+const { deleteFile } = require('../utils/file.js');
+const path = require('path');
 
 const saltRounds = process.env.SALT_ROUNDS;
 
-export default {
+module.exports = {
   async list(request, response) {
     const requestUsers = request.query.requestUsers;
     const usersIds = requestUsers.split(',');

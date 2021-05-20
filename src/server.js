@@ -1,6 +1,8 @@
 const dotenv = require('dotenv');
 const app = require('./app.js');
-require('./db/index.js');
+const Database = require('./db/index.js');
+
+new Database(false);
 
 dotenv.config();
 

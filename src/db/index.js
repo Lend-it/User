@@ -5,13 +5,15 @@ const User = require('../models/User.js');
 const models = [User];
 
 class Database {
-  constructor() {
-    this.init();
+  constructor(test) {
+    this.init(test);
   }
 
-  init() {
+  init(test) {
     try {
-      this.connection = new Sequelize(databaseConfig[process.env.NODE_ENV]);
+      this.connection = new Sequelize(
+        databaseConfig[test ? 'test' : process.env.NODE_ENV]
+      );
       models.forEach(model => model.init(this.connection));
     } catch (error) {
       console.log(error.message);
@@ -19,4 +21,4 @@ class Database {
   }
 }
 
-module.exports = new Database();
+module.exports = Database;

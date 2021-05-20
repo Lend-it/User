@@ -7,10 +7,11 @@ module.exports = {
     dialect: 'postgres',
   },
   test: {
-    username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
+    username: 'postgres',
+    password: 'postgres',
     database: 'userlenditdb_dev',
-    host: 'db_user',
+    host: 'localhost',
+    port: 5105,
     dialect: 'postgres',
   },
   homolog: {

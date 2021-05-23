@@ -5,16 +5,16 @@ const dotenv = require('dotenv');
 
 describe('User tests', () => {
   beforeAll(async () => {
-    const db = new Database(true);
+    new Database(true);
     dotenv.config();
   });
 
   it('Should be able to create a new user', async () => {
     const user = {
-      useremail: 'test@email.com',
-      name: 'Harvey Moody',
-      whatsappnumber: '55620677557',
-      password: '053488',
+      useremail: 'existUser@gmail.com',
+      name: 'Dora Mills',
+      whatsappnumber: '61999332223',
+      password: '446253',
       latitude: 0,
       longitude: 0,
     };
@@ -28,10 +28,10 @@ describe('User tests', () => {
 
   it('Should not able to create an user that already exists', async () => {
     const user = {
-      useremail: 'test@email.com',
-      name: 'Harvey Moody',
-      whatsappnumber: '55620677557',
-      password: '053488',
+      useremail: 'existUser@gmail.com',
+      name: 'Dora Mills',
+      whatsappnumber: '61999332223',
+      password: '446253',
       latitude: 0,
       longitude: 0,
     };
@@ -44,13 +44,13 @@ describe('User tests', () => {
   });
 
   it('Should be able to show an user', async () => {
-    const response = await request(app).get('/users/test@email.com');
+    const response = await request(app).get('/users/existUser@gmail.com');
 
     expect(response.status).toBe(200);
   });
 
   it('Should not be able to show an non-existing user', async () => {
-    const response = await request(app).get('/users/test2@email.com');
+    const response = await request(app).get('/users/sigkofej@gmail.com');
 
     expect(response.status).toBe(400);
   });
@@ -59,7 +59,7 @@ describe('User tests', () => {
     const response = await request(app)
       .get('/users')
       .query({
-        requestUsers: 'test@email.com',
+        requestUsers: 'existUser@gmail.com',
       });
 
     expect(response.status).toBe(200);
@@ -67,8 +67,8 @@ describe('User tests', () => {
 
   it('Should be able to update an user', async () => {
     const user = {
-      useremail: 'test@email.com',
-      name: 'test2',
+      useremail: 'existUser@gmail.com',
+      name: 'Violet Hughes',
       whatsappnumber: '61999332223',
     };
 
@@ -81,8 +81,8 @@ describe('User tests', () => {
 
   it('Should not be able to update an non-existing user', async () => {
     const user = {
-      useremail: 'test3@email.com',
-      name: 'test2',
+      useremail: 'nomoccu@gmail.com',
+      name: 'Seth Meyer',
       whatsappnumber: '61999332223',
     };
 
@@ -95,13 +95,13 @@ describe('User tests', () => {
 
   it('Should be able to update the location of a user', async () => {
     const user = {
-      useremail: 'test@email.com',
+      useremail: 'existUser@gmail.com',
       latitude: 5,
       longitude: 5,
     };
 
     const response = await request(app)
-      .put('/users/location')
+      .patch('/users/location')
       .send(user);
 
     expect(response.status).toBe(200);
@@ -109,13 +109,13 @@ describe('User tests', () => {
 
   it('Should not be able to update the location of a non-existing user', async () => {
     const user = {
-      useremail: 'test3@email.com',
+      useremail: 'wow@gmail.com',
       latitude: 5,
       longitude: 5,
     };
 
     const response = await request(app)
-      .put('/users/location')
+      .patch('/users/location')
       .send(user);
 
     expect(response.status).toBe(404);

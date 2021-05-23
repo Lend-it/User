@@ -11,10 +11,10 @@ describe('User tests', () => {
 
   it('Should be able to create a session', async () => {
     const user = {
-      useremail: 'test6@email.com',
-      name: 'Harvey Moody',
-      whatsappnumber: '55620677557',
-      password: '053488',
+      useremail: 'uhokuuzi@gmail.com',
+      name: 'Josie Beck',
+      whatsappnumber: '61999332223',
+      password: '327667',
       latitude: 0,
       longitude: 0,
     };
@@ -35,10 +35,10 @@ describe('User tests', () => {
 
   it('Should not be able to create a session with an non existing user', async () => {
     const user = {
-      useremail: 'test7@email.com',
-      name: 'Harvey Moody',
-      whatsappnumber: '55620677557',
-      password: '053488',
+      useremail: 'fog@gmail.com',
+      name: 'Jeanette McCormick',
+      whatsappnumber: '61999332223',
+      password: '458016',
       latitude: 0,
       longitude: 0,
     };

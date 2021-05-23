@@ -2,6 +2,7 @@ const request = require('supertest');
 const Database = require('../src/db/index.js');
 const app = require('../src/app');
 const dotenv = require('dotenv');
+const path = require('path');
 
 describe('User tests', () => {
   beforeAll(async () => {
@@ -117,6 +118,32 @@ describe('User tests', () => {
     const response = await request(app)
       .patch('/users/location')
       .send(user);
+
+    expect(response.status).toBe(404);
+  });
+
+  it('Should be able to update the avatar of a user', async () => {
+    const user = {
+      useremail: 'existUser@gmail.com',
+    };
+
+    const response = await request(app)
+      .patch('/users/avatar')
+      .field('useremail', user.useremail)
+      .attach('avatar', path.resolve(__dirname, './test.png'));
+
+    expect(response.status).toBe(200);
+  });
+
+  it('Should not be able to update the avatar of a non-existing user', async () => {
+    const user = {
+      useremail: 'non-exinst@gmail.com',
+    };
+
+    const response = await request(app)
+      .patch('/users/avatar')
+      .field('useremail', user.useremail)
+      .attach('avatar', path.resolve(__dirname, './test.png'));
 
     expect(response.status).toBe(404);
   });

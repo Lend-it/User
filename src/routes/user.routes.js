@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const verifyToken = require('../middlewares/auth.js');
 const uploadConfig = require('../config/upload.js');
 const multer = require('multer');
 

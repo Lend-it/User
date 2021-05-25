@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 
 class RecoverPassword extends Sequelize.Model {
   static init(connection) {
@@ -26,4 +26,4 @@ class RecoverPassword extends Sequelize.Model {
   }
 }
 
-export default RecoverPassword;
+module.exports = RecoverPassword;

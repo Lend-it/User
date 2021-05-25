@@ -1,12 +1,12 @@
-import User from '../models/User.js';
-import crypto from 'crypto';
-import RecoverPassword from '../models/RecoverPassword.js';
-import mailer from '../modules/mailer.js';
-import bcrypt from 'bcrypt';
+const User = require('../models/User.js');
+const crypto = require('crypto');
+const RecoverPassword = require('../models/RecoverPassword.js');
+const mailer = require('../modules/mailer.js');
+const bcrypt = require('bcrypt');
 
 const saltRounds = process.env.SALT_ROUNDS;
 
-export default {
+module.exports = {
   async sendMailForgot(request, response) {
     const { useremail } = request.body;
 

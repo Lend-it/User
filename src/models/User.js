@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-import sign from 'jsonwebtoken';
+const sign = require('jsonwebtoken');
 
 class User extends Sequelize.Model {
   static init(connection) {

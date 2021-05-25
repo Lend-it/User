@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   development: {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
@@ -7,10 +7,11 @@ export default {
     dialect: 'postgres',
   },
   test: {
-    username: process.env.POSTGRES_USER,
-    password: process.env.POSTGRES_PASSWORD,
-    database: 'userlenditdb_test',
-    host: 'db_user',
+    username: 'postgres',
+    password: 'postgres',
+    database: 'userlenditdb_dev',
+    host: 'localhost',
+    port: 5105,
     dialect: 'postgres',
   },
   homolog: {

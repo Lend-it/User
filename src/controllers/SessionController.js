@@ -1,8 +1,8 @@
-import User from '../models/User.js';
-import bcrypt from 'bcrypt';
-import generateToken from '../services/auth.js';
+const User = require('../models/User.js');
+const bcrypt = require('bcrypt');
+const generateToken = require('../services/auth.js');
 
-export default {
+module.exports = {
   async create(request, response) {
     const { useremail, password } = request.body;
 

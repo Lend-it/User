@@ -1,8 +1,8 @@
-import { Router } from 'express';
+const { Router } = require('express');
 
-import userRouter from './routes/user.routes.js';
-import sessionRouter from './routes/session.routes.js';
-import passwordRouter from './routes/password.routes.js';
+const userRouter = require('./routes/user.routes.js');
+const sessionRouter = require('./routes/session.routes.js');
+const passwordRouter = require('./routes/password.routes.js');
 
 const routes = Router();
 
@@ -10,4 +10,4 @@ routes.use('/users', userRouter);
 routes.use('/session', sessionRouter);
 routes.use('/password', passwordRouter);
 
-export default routes;
+module.exports = routes;

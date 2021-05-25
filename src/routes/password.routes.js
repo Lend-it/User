@@ -1,10 +1,10 @@
-import { Router } from 'express';
+const { Router } = require('express');
 
-import PasswordController from '../controllers/PasswordController.js';
+const PasswordController = require('../controllers/PasswordController.js');
 
 const passwordRouter = Router();
 
 passwordRouter.post('/forgot', PasswordController.sendMailForgot);
 passwordRouter.patch('/reset', PasswordController.resetPassword);
 
-export default passwordRouter;
+module.exports = passwordRouter;

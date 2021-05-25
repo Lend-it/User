@@ -1,8 +1,6 @@
 const User = require('../models/User.js');
 const bcrypt = require('bcrypt');
 const generateToken = require('../services/auth.js');
-const { deleteFile } = require('../utils/file.js');
-const path = require('path');
 
 const saltRounds = process.env.SALT_ROUNDS;
 

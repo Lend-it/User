@@ -6,8 +6,6 @@ const UserController = require('../controllers/UserController.js');
 
 const userRouter = Router();
 
-const upload = multer(uploadConfig.upload('./tmp'));
-
 userRouter.get('/', UserController.list);
 
 userRouter.get('/:useremail', UserController.show);

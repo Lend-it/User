@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize');
 const databaseConfig = require('../config/database.js');
 const User = require('../models/User.js');
+import RecoverPassword from '../models/RecoverPassword.js';
 
-const models = [User];
+const models = [User, RecoverPassword];
 
 class Database {
   constructor(test) {

@@ -41,7 +41,7 @@ test:
 	sudo docker-compose -f docker-compose.dev.yml run user npm run test-ci
 
 check-db:
-	sudo docker-compose -f docker-compose.dev.yml exec db psql -U postgres
+	sudo docker-compose -f docker-compose.dev.yml exec db_user psql -U postgres
 
 cov:
 	sudo docker-compose -f docker-compose.dev.yml run user npm run cov

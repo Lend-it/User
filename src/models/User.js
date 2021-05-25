@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+import sign from 'jsonwebtoken';
 
 class User extends Sequelize.Model {
   static init(connection) {
@@ -11,7 +12,6 @@ class User extends Sequelize.Model {
         name: Sequelize.TEXT,
         whatsappnumber: Sequelize.TEXT,
         password: Sequelize.TEXT,
-        avatar: Sequelize.TEXT,
         latitude: Sequelize.DECIMAL,
         longitude: Sequelize.DECIMAL,
       },
@@ -23,6 +23,22 @@ class User extends Sequelize.Model {
       }
     );
     return this;
+  }
+  encodeToken() {
+    const date = new Date();
+
+    const token = sign(
+      {
+        exp: new Date(date).setMinutes(
+          date.getHours() + process.env.TOKEN_EXPIRATION_HOURS
+        ),
+        iat: date.toISOString(),
+        sub: this.useremail,
+      },
+      process.env.SECRET
+    );
+
+    return token;
   }
 }
 
